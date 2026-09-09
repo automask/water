@@ -179,28 +179,57 @@ its Water instance is recreated, so reattach receivers to the new instance. The 
 which scene materials participate. The existing visibility and caustic settings control their
 appearance; there is no separate demo-only underwater fog control.
 
-## The editable gallery project
+## The Adrift Editor example
 
-Open [Water + Atmosphere in the Editor](https://playcanvas.com/editor/scene/2591939)
-and press **Launch**. The root entity's `waterGallery` script runs the same nine studies
-as GitHub Pages inside the Editor application's existing canvas and engine. Its Camera
-Entity and Sun Entity fields reference the scene's camera and directional light.
+[Water + Atmosphere](https://playcanvas.com/editor/scene/2591939) uses a small,
+authored scene. The camera stays at its Editor transform; imported coast and buoy
+templates contain native render entities that can be inspected and repositioned.
+There is no runtime gallery bootstrap or hosted asset root.
 
-The gallery is an application example, not a required renderer component. Its coast,
-mooring piles, floating buoys, bathymetry, material receivers, shot direction and UI are
-created at launch. They are not baked into the Editor hierarchy. The small
-`water-scripts.mjs` asset contains the separate `waterSurface` and `atmosphereSky`
-components for use in your own authored scenes.
+| Entity | Script | Attribute connections |
+| --- | --- | --- |
+| Camera | `adriftCamera` | `focusEntity` → Buoy |
+| Light | `atmosphereSky` | `lightEntity` → Light |
+| Water | `waterSurface` | `cameraEntity` → Camera; `skyEntity` → Light |
+| coast | `adriftTerrain` | `waterEntity` → Water; seven texture assets below |
+| Buoy | `adriftBuoy` | `waterEntity` → Water |
 
-The gallery's **Asset Root** points to `https://marklundin.github.io/water/`.
-Geometry, textures and bathymetry are loaded from that public deployment, so the Editor
-project depends on those hosted files. This avoids duplicating the large environment
-in account storage. To use another host, copy the production `demo/assets` and
-`demo/lib` directories there and change Asset Root. Relative asset paths and the
-matching coast bathymetry must remain intact.
+Camera position is `[5, 2, 10]`, Euler rotation `[-4.94, 30.26, 0]`, FOV 38,
+and clip range 0.1–60000. Buoy position is `[-2, 0, -2]`; coast and Water are at
+the origin. The sky uses sun elevation 12°, azimuth 108°, haze 0.6 and exposure
+0.33. Water uses wind speed 1.8, wave height 0.6, visibility 16 and medium quality.
 
-Run `npm run build:editor:gallery` to regenerate `dist-editor/water-gallery.mjs`,
-then upload it over the existing asset. Changes to the reusable components use
-`npm run build:editor` and `dist-editor/water-scripts.mjs` instead. The gallery entry
-point is a one-time application bootstrap: restart Launch after changing its fields.
-Use the reusable components when you need enable/disable lifecycle behaviour.
+Assign these **preloaded texture assets** to `adriftTerrain`:
+
+| Attribute | Asset |
+| --- | --- |
+| `sandAlbedo` | `coast_sand_01_diffuse_2k.jpg` |
+| `sandNormal` | `coast_sand_01_nor_gl_2k.jpg` |
+| `landAlbedo` | `coast_land_rocks_01_diffuse_2k.jpg` |
+| `landNormal` | `coast_land_rocks_01_nor_gl_2k.jpg` |
+| `rockAlbedo` | `rock_face_03_diffuse_2k.jpg` |
+| `rockNormal` | `rock_face_03_nor_gl_2k.jpg` |
+| `rockArm` | `rock_face_03_arm_2k.jpg` |
+
+The terrain script shades existing render components and registers their materials
+as water receivers. The buoy script samples the water around its authored anchor
+and animates only its position and rotation. The camera script adds the example's
+cinematic treatment and focuses on its assigned entity. These three scripts are
+example code, separate from the reusable water and atmosphere components.
+
+To rebuild the uploadable scripts:
+
+```sh
+npm run build:editor          # reusable waterSurface + atmosphereSky
+npm run build:editor:adrift   # example camera, buoy and terrain scripts
+npm run export:editor:buoy    # offline export of the existing buoy prop
+npm run build                # compressed production coast and textures
+```
+
+Upload `dist-editor/water-scripts.mjs` and `dist-editor/adrift-scripts.mjs` and parse
+their attributes. Import `dist-editor/adrift-buoy.glb` and
+`dist/demo/assets/coast/coast.glb`, then drag their templates into the hierarchy.
+Upload the seven production texture files from `dist/demo/assets/` and connect the
+attributes listed above. Imported coast materials and embedded textures remain
+part of the project. The GLB export happens offline; it does not generate geometry
+when the scene launches.

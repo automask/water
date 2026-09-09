@@ -341,7 +341,20 @@ export class Water {
             restore();
         };
         this._receivers.set(material, detach);
+        this._bindReceiver(material);
         return detach;
+    }
+
+    _bindReceiver(material) {
+        const cfg = this.config, vol = cfg.volume, c = cfg.caustics;
+        const sd = this._sunDirection, sc = this._sunColor;
+        bindCausticWaves(material, this._simulation, cfg);
+        material.setParameter('uReceiverExtinction', [3.2, 1, 0.6].map(e => e / vol.visibility));
+        material.setParameter('uReceiverScatter', vol.color);
+        material.setParameter('uReceiverSun', [sd.x, sd.y, sd.z]);
+        material.setParameter('uReceiverSunColor', [sc.r, sc.g, sc.b]);
+        material.setParameter('uReceiverParams', [cfg.seaLevel, c.enabled ? c.strength : 0, c.scale, this._skyRadiance ? this._environmentExposure : 0]);
+        material.setParameter('uReceiverSky', this._skyRadiance || this._deepWaterMap);
     }
 
     /**
@@ -414,15 +427,7 @@ export class Water {
 
         bindCausticWaves(m, sim, cfg);
         const c = cfg.caustics;
-        for (const receiver of this._receivers?.keys() ?? []) {
-            bindCausticWaves(receiver, sim, cfg);
-            receiver.setParameter('uReceiverExtinction', [3.2, 1, 0.6].map(e => e / vol.visibility));
-            receiver.setParameter('uReceiverScatter', vol.color);
-            receiver.setParameter('uReceiverSun', [sd.x, sd.y, sd.z]);
-            receiver.setParameter('uReceiverSunColor', [sc.r, sc.g, sc.b]);
-            receiver.setParameter('uReceiverParams', [cfg.seaLevel, c.enabled ? c.strength : 0, c.scale, this._skyRadiance ? this._environmentExposure : 0]);
-            receiver.setParameter('uReceiverSky', this._skyRadiance || this._deepWaterMap);
-        }
+        for (const receiver of this._receivers?.keys() ?? []) this._bindReceiver(receiver);
         m.setParameter('uCausticsParams', [c.enabled ? c.strength : 0, c.scale, CAUSTIC_DEPTH_FADE]);
 
         const active = this._shoreMap ? 1 : 0;

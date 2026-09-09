@@ -26,7 +26,7 @@ The water keeps moving while the camera is paused. WebGPU is preferred; WebGL2 i
 
 ## Add it to PlayCanvas
 
-The [Editor gallery](https://playcanvas.com/editor/scene/2591939) runs all nine studies on Launch. Its example script builds the environment at runtime and shares the public demo’s hosted assets; the coast is not an editable Editor hierarchy.
+The [Editor example](https://playcanvas.com/editor/scene/2591939) is a compact Adrift scene: an authored camera, coast and buoy entities, and explicit script attributes connecting water, sky, lighting and materials. Geometry and textures belong to the Editor project. The nine-study gallery remains a separate web example.
 
 The reusable components are **`waterSurface`** and **`atmosphereSky`**. They use your project's camera and light; the example's coast and cinematic treatment are separate.
 
