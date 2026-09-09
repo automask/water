@@ -98,3 +98,39 @@ The allocation estimate is about 558 MiB at baseline. Pixel ratio 1 lowers it to
 remains compressed on the GPU is a separate candidate from download-only JPEG
 compression ([PlayCanvas guidance](https://developer.playcanvas.com/user-manual/optimization/texture-compression/)).
 No visual defaults have been changed based on this desktop result.
+
+## Production repeat without GPU timestamps
+
+[Raw report](profiles/2026-09-09-adrift-production-webgpu.json), same viewport and
+shot, compressed production assets, browser renderer `apple metal-3`, GPU timing
+explicitly disabled. Baselines were 16.0 and 13.9 fps (13.1% drift), so comparisons
+are approximate rather than precise speedup estimates.
+
+| Intervention | Average fps |
+| --- | ---: |
+| Baseline | 16.0 |
+| Pixel ratio 1 | 46.1 |
+| MSAA 1 | 21.0 |
+| Post effects off | 21.3 |
+| FFT frozen | 19.6 |
+| Low water quality | 17.2 |
+| Scene geometry off | 31.6 |
+| Shadows off | 19.2 |
+| Baseline repeat | 13.9 |
+
+The baseline stayed slow even without GPU timestamps. The earlier quick production
+HUD reading was not a controlled comparison and does not establish timestamp
+collection as the cause. Keeping GPU timing optional nevertheless separates that
+potential measurement overhead from frame-interval comparisons.
+
+The large resolution and scene-workload effects persist. CPU update/submission
+medians remain 0.9–2.7 ms. This is evidence for GPU/rendering work as the main desktop
+limit, not a mobile diagnosis. Small differences, particularly low water quality,
+should not be overinterpreted given baseline drift.
+
+The engine estimates **559 MiB** of allocations. The 4096×2048 HDR sky map alone is
+64 MiB; seven uncompressed 2K terrain textures are about 149 MiB combined. Scene
+colour, refraction colour and full-resolution DOF blur are another ~94 MiB.
+Reducing resolution, scene/material cost and GPU-resident texture memory are the
+highest-priority follow-up experiments on the phone. Do not globally degrade the
+wave model on the basis of these desktop timings.

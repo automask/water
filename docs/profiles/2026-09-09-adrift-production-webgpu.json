@@ -1,0 +1,313 @@
+{
+  "status": "complete",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+  "started": "2026-09-09T18:17:46.127Z",
+  "shot": "adrift",
+  "renderer": "apple metal-3",
+  "gpuTimingEnabled": false,
+  "gpuTimersSupported": true,
+  "note": "CPU = main-thread update + submit. GPU timestamps lag; WebGL GpuFrame excludes FFT passes submitted during update. Memory is an engine allocation estimate, not measured physical VRAM. FPS includes display scheduling. No mobile emulation.",
+  "baselineDriftPercent": 13.1,
+  "largestTextures": [
+    {
+      "name": "skyboxEquirect",
+      "width": 4096,
+      "height": 2048,
+      "estimatedMiB": 64
+    },
+    {
+      "name": "uSceneColorMap",
+      "width": 2560,
+      "height": 1440,
+      "estimatedMiB": 37.5
+    },
+    {
+      "name": "SceneColor",
+      "width": 2560,
+      "height": 1440,
+      "estimatedMiB": 28.13
+    },
+    {
+      "name": "DofBlurTexture",
+      "width": 2560,
+      "height": 1440,
+      "estimatedMiB": 28.13
+    },
+    {
+      "name": "lighting-1024",
+      "width": 1024,
+      "height": 1024,
+      "estimatedMiB": 24
+    },
+    {
+      "name": "coast_land_rocks_01_diffuse",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "coast_sand_01_diffuse",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "rock_face_03_arm",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "rock_face_03_diffuse",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "rock_face_03_nor_gl",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "coast_sand_01_nor_gl",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "coast_land_rocks_01_nor_gl",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 21.33
+    },
+    {
+      "name": "skyLightingEquirect",
+      "width": 2048,
+      "height": 1024,
+      "estimatedMiB": 16
+    },
+    {
+      "name": "ShadowMap2D_DEPTH",
+      "width": 2048,
+      "height": 2048,
+      "estimatedMiB": 16
+    },
+    {
+      "name": "SceneLinearDepthTexture",
+      "width": 2560,
+      "height": 1440,
+      "estimatedMiB": 14.06
+    }
+  ],
+  "warning": null,
+  "results": [
+    {
+      "case": "Baseline",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 129,
+      "fps": 16,
+      "frameMedianMs": 57.4,
+      "frameP95Ms": 91.8,
+      "cpuMedianMs": 1.8,
+      "draws": 181,
+      "gpuMemoryMiB": 558.92,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "Pixel ratio 1",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        1280,
+        720
+      ],
+      "pixelRatio": 1,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 370,
+      "fps": 46.1,
+      "frameMedianMs": 24.7,
+      "frameP95Ms": 26.4,
+      "cpuMedianMs": 2.7,
+      "draws": 181,
+      "gpuMemoryMiB": 460.48,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "MSAA 1",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 1,
+      "quality": "medium",
+      "frames": 168,
+      "fps": 21,
+      "frameMedianMs": 49.9,
+      "frameP95Ms": 51.1,
+      "cpuMedianMs": 1.6,
+      "draws": 181,
+      "gpuMemoryMiB": 558.92,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "Post effects off",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 171,
+      "fps": 21.3,
+      "frameMedianMs": 49.7,
+      "frameP95Ms": 58.3,
+      "cpuMedianMs": 1.5,
+      "draws": 166,
+      "gpuMemoryMiB": 507.36,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "FFT frozen",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 158,
+      "fps": 19.6,
+      "frameMedianMs": 50,
+      "frameP95Ms": 58.4,
+      "cpuMedianMs": 1.1,
+      "draws": 181,
+      "gpuMemoryMiB": 558.92,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "Low water quality",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "low",
+      "frames": 139,
+      "fps": 17.2,
+      "frameMedianMs": 58.3,
+      "frameP95Ms": 75,
+      "cpuMedianMs": 1.3,
+      "draws": 171,
+      "gpuMemoryMiB": 533.17,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "Scene geometry off",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 254,
+      "fps": 31.6,
+      "frameMedianMs": 33.3,
+      "frameP95Ms": 41.3,
+      "cpuMedianMs": 0.9,
+      "draws": 19,
+      "gpuMemoryMiB": 558.92,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "Shadows off",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 154,
+      "fps": 19.2,
+      "frameMedianMs": 50,
+      "frameP95Ms": 58.4,
+      "cpuMedianMs": 0.9,
+      "draws": 79,
+      "gpuMemoryMiB": 542.92,
+      "gpuPassMedianMs": {}
+    },
+    {
+      "case": "Baseline repeat",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 112,
+      "fps": 13.9,
+      "frameMedianMs": 73.9,
+      "frameP95Ms": 91.6,
+      "cpuMedianMs": 1.3,
+      "draws": 171,
+      "gpuMemoryMiB": 558.92,
+      "gpuPassMedianMs": {}
+    }
+  ]
+}
