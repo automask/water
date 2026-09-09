@@ -1,0 +1,345 @@
+{
+  "status": "complete",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+  "started": "2026-09-09T18:13:56.825Z",
+  "shot": "adrift",
+  "renderer": "unavailable",
+  "gpuTimers": true,
+  "note": "CPU = main-thread update + submit. GPU timestamps lag; WebGL GpuFrame excludes FFT passes submitted during update. Memory is an engine allocation estimate, not measured physical VRAM. FPS includes display scheduling. No mobile emulation.",
+  "baselineDriftPercent": 1.9,
+  "warning": null,
+  "results": [
+    {
+      "case": "Baseline",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 130,
+      "fps": 16,
+      "frameMedianMs": 58.6,
+      "frameP95Ms": 67.5,
+      "cpuMedianMs": 2.5,
+      "draws": 181,
+      "gpuMemoryMiB": 558.43,
+      "gpuPassMedianMs": {
+        "Downsample": 286.26,
+        "Upsample": 203.49,
+        "Forward": 73.73,
+        "Compose": 47.32,
+        "DofBlur": 45.88,
+        "SceneHalf": 42.27,
+        "CoC": 40.7,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.66,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07
+      }
+    },
+    {
+      "case": "Pixel ratio 1",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        1280,
+        720
+      ],
+      "pixelRatio": 1,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 302,
+      "fps": 37.7,
+      "frameMedianMs": 25,
+      "frameP95Ms": 33.4,
+      "cpuMedianMs": 2.9,
+      "draws": 181,
+      "gpuMemoryMiB": 459.99,
+      "gpuPassMedianMs": {
+        "Downsample": 88.15,
+        "Upsample": 61.34,
+        "Forward": 26.35,
+        "Compose": 13.5,
+        "SceneHalf": 13.3,
+        "DofBlur": 13.11,
+        "CoC": 11.99,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.52,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07
+      }
+    },
+    {
+      "case": "MSAA 1",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 1,
+      "quality": "medium",
+      "frames": 156,
+      "fps": 19.3,
+      "frameMedianMs": 50,
+      "frameP95Ms": 58.4,
+      "cpuMedianMs": 2.7,
+      "draws": 191,
+      "gpuMemoryMiB": 558.43,
+      "gpuPassMedianMs": {
+        "Downsample": 228.46,
+        "Upsample": 161.94,
+        "Forward": 59.05,
+        "Compose": 38.93,
+        "DofBlur": 37.29,
+        "SceneHalf": 33.82,
+        "CoC": 32.44,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.66,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07
+      }
+    },
+    {
+      "case": "Post effects off",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 155,
+      "fps": 19.3,
+      "frameMedianMs": 50,
+      "frameP95Ms": 59.4,
+      "cpuMedianMs": 2.5,
+      "draws": 176,
+      "gpuMemoryMiB": 506.87,
+      "gpuPassMedianMs": {
+        "Forward": 67.44,
+        "Compose": 39.12,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.66,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07
+      }
+    },
+    {
+      "case": "FFT frozen",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 140,
+      "fps": 17.4,
+      "frameMedianMs": 58.3,
+      "frameP95Ms": 66.7,
+      "cpuMedianMs": 2.1,
+      "draws": 181,
+      "gpuMemoryMiB": 558.43,
+      "gpuPassMedianMs": {
+        "Downsample": 281.35,
+        "Upsample": 200.67,
+        "Forward": 71.11,
+        "Compose": 46.07,
+        "DofBlur": 45.02,
+        "SceneHalf": 41.16,
+        "CoC": 39.85,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.66,
+        "ShaderQuad": 0.26
+      }
+    },
+    {
+      "case": "Low water quality",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "low",
+      "frames": 135,
+      "fps": 16.8,
+      "frameMedianMs": 58.3,
+      "frameP95Ms": 66.9,
+      "cpuMedianMs": 2.6,
+      "draws": 181,
+      "gpuMemoryMiB": 532.68,
+      "gpuPassMedianMs": {
+        "Downsample": 286.85,
+        "Upsample": 203.62,
+        "Forward": 75.5,
+        "Compose": 47.05,
+        "DofBlur": 45.42,
+        "SceneHalf": 41.55,
+        "CoC": 40.7,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.66,
+        "oceanFFTH": 0.13,
+        "oceanFFTV": 0.13,
+        "oceanEvolve": 0.07,
+        "oceanAssemble": 0.07,
+        "ShaderQuad": 0.07
+      }
+    },
+    {
+      "case": "Scene geometry off",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 252,
+      "fps": 31.5,
+      "frameMedianMs": 33.3,
+      "frameP95Ms": 34,
+      "cpuMedianMs": 1.3,
+      "draws": 19,
+      "gpuMemoryMiB": 558.43,
+      "gpuPassMedianMs": {
+        "Downsample": 115.8,
+        "Upsample": 81.53,
+        "Compose": 23.33,
+        "DofBlur": 21.5,
+        "Forward": 17.63,
+        "SceneHalf": 16.78,
+        "CoC": 16.45,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07,
+        "Prepass": 0,
+        "ShadowDir-Sun": 0
+      }
+    },
+    {
+      "case": "Shadows off",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 147,
+      "fps": 18.2,
+      "frameMedianMs": 56.2,
+      "frameP95Ms": 59.1,
+      "cpuMedianMs": 1.8,
+      "draws": 89,
+      "gpuMemoryMiB": 542.43,
+      "gpuPassMedianMs": {
+        "Downsample": 261.1,
+        "Upsample": 185.79,
+        "Forward": 65.86,
+        "Compose": 43.06,
+        "DofBlur": 41.88,
+        "SceneHalf": 37.81,
+        "CoC": 37.16,
+        "Prepass": 0.66,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07
+      }
+    },
+    {
+      "case": "Baseline repeat",
+      "backend": "webgpu",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": [
+        2560,
+        1440
+      ],
+      "pixelRatio": 2,
+      "samples": 4,
+      "quality": "medium",
+      "frames": 131,
+      "fps": 16.3,
+      "frameMedianMs": 58.5,
+      "frameP95Ms": 67,
+      "cpuMedianMs": 2.4,
+      "draws": 181,
+      "gpuMemoryMiB": 558.43,
+      "gpuPassMedianMs": {
+        "Downsample": 287.38,
+        "Upsample": 210.96,
+        "Forward": 73.86,
+        "Compose": 47.19,
+        "DofBlur": 46.07,
+        "SceneHalf": 42.34,
+        "CoC": 42.21,
+        "ShadowDir-Sun": 1.18,
+        "Prepass": 0.66,
+        "oceanFFTH": 0.26,
+        "oceanFFTV": 0.26,
+        "oceanEvolve": 0.13,
+        "oceanAssemble": 0.13,
+        "ShaderQuad": 0.07
+      }
+    }
+  ]
+}

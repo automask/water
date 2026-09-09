@@ -101,3 +101,16 @@ GitHub Pages serves the generated `gh-pages` branch. Maintainers can run `npm ru
 This is an experimental renderer and visual study. Reflections have screen-space limits; foam and caustics are approximations. The sky models atmospheric scattering, not cloud volumes. See [the review notes](docs/review.md) for detail.
 
 The bundled rock scans and ground textures are **CC0 assets from Poly Haven**; [asset credits](demo/assets/README.md) list the sources. PlayCanvas and the included decoder dependencies retain their upstream licenses. The separate Saltreach reference is not included in this repository or deployment.
+
+## Profile on your device
+
+Open the [performance comparison](https://marklundin.github.io/water/?shot=adrift&still&profile=auto)
+on the device you want to measure. Keep the tab visible for about two minutes, then
+choose **Download report**. It compares pixel ratio, MSAA, post effects, FFT work,
+water quality, scene geometry and shadows one at a time, restoring the original
+settings afterward. Normal demo URLs do not load the profiler.
+
+The report includes frame-time percentiles, CPU submission time, available GPU
+timings and estimated graphics allocations. It flags baseline drift; repeat an
+unstable run before interpreting improvements. These are measurements on the
+current device, not mobile emulation. See [profiling notes](docs/performance.md).

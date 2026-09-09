@@ -415,6 +415,11 @@ export async function mountGallery({ app: suppliedApp, cameraEntity, sunEntity, 
         if (acc > 0.5) { fpsEl.textContent = Math.round(frames / acc); acc = 0; frames = 0; }
     });
 
+    if (params.has('profile')) {
+        const { installProfile } = await import('./profile.js');
+        installProfile({ app, device, water, frame, director, sun, params });
+    }
+
     window.__water = { app, water, sky, camera, device, frame, director };
     // Bind the FFT textures before the camera can draw the newly created surface.
     water.update(1 / 60, camera);
