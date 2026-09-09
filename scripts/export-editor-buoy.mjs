@@ -11,6 +11,8 @@ const mats = {
     hull: material([.6, .1, .05], .42), rust: material([.34, .16, .09], .28),
     steel: material([.4, .42, .44], .55, .6), lamp: material([.85, .88, .9], .8)
 };
+// Stable, unique names preserve material assignments in the Editor GLB importer.
+for (const [name, mat] of Object.entries(mats)) mat.name = `Buoy ${name}`;
 const buoy = createBuoy(app.graphicsDevice, 1, mats);
 app.root.addChild(buoy);
 await mkdir('dist-editor', { recursive: true });
