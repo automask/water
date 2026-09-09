@@ -14,7 +14,10 @@ export function installProfile({ app, device, water, frame, director, sun, param
         setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
     panel.append(button, download, output); document.body.append(panel);
-    device.gpuProfiler && (device.gpuProfiler.enabled = true);
+    // Timestamp readback can perturb performance substantially on some browser/GPU pairs.
+    // Keep FPS comparisons uninstrumented; opt into GPU timings only for a separate run.
+    const gpuTimingEnabled = params.has('profile-gpu');
+    device.gpuProfiler && (device.gpuProfiler.enabled = gpuTimingEnabled);
     const initial = { ratio: device.maxPixelRatio, samples: frame.rendering.samples, quality: water.config.quality, shadows: sun.light.castShadows };
     const renders = app.root.findComponents('render').filter(r => r.entity !== water._entity);
     const enabled = renders.map(r => r.enabled);
@@ -64,7 +67,7 @@ export function installProfile({ app, device, water, frame, director, sun, param
     button.addEventListener('click', () => {
         if (running) return;
         director.paused = true;
-        metadata = { userAgent: navigator.userAgent, started: new Date().toISOString(), shot: params.get('shot') || 'stillwater', renderer: device.unmaskedRenderer || [device.gpuAdapter?.info?.vendor, device.gpuAdapter?.info?.architecture, device.gpuAdapter?.info?.description].filter(Boolean).join(' ') || 'unavailable', gpuTimers: device.isWebGPU ? Boolean(device.supportsTimestampQuery) : Boolean(device.extDisjointTimerQuery), note: 'CPU = main-thread update + submit. GPU timestamps lag; WebGL GpuFrame excludes FFT passes submitted during update. Memory is an engine allocation estimate, not measured physical VRAM. FPS includes display scheduling. No mobile emulation.' };
+        metadata = { userAgent: navigator.userAgent, started: new Date().toISOString(), shot: params.get('shot') || 'stillwater', renderer: device.unmaskedRenderer || [device.gpuAdapter?.info?.vendor, device.gpuAdapter?.info?.architecture, device.gpuAdapter?.info?.description].filter(Boolean).join(' ') || 'unavailable', gpuTimingEnabled, gpuTimersSupported: device.isWebGPU ? Boolean(device.supportsTimestampQuery) : Boolean(device.extDisjointTimerQuery), note: 'CPU = main-thread update + submit. GPU timestamps lag; WebGL GpuFrame excludes FFT passes submitted during update. Memory is an engine allocation estimate, not measured physical VRAM. FPS includes display scheduling. No mobile emulation.' };
         download.hidden = true; results = []; index = -1; running = true; button.disabled = true; next();
     });
     app.on('frameupdate', ms => { cpuStart = performance.now(); interval = ms; });

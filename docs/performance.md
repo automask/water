@@ -2,6 +2,9 @@
 
 Use `?shot=adrift&still&profile=auto` for an automatic comparison, or `&profile`
 to start it with a button. Add `&gfx=webgl2` or `&gfx=webgpu` to compare backends.
+GPU timestamp collection is **off by default** because it can perturb frame rate.
+Add `&profile-gpu` only for a separate diagnostic run; compare its baseline against
+a run without GPU timing before trusting those numbers.
 The URL otherwise uses the same backend selection as the normal demo.
 
 The camera is held still; waves and floaters keep moving except in the explicit
@@ -59,11 +62,14 @@ Download compression alone does not reduce decoded GPU texture allocations.
 References: [PlayCanvas device pixel ratio](https://developer.playcanvas.com/user-manual/optimization/runtime-devicepixelratio/),
 [PlayCanvas optimization guidelines](https://developer.playcanvas.com/user-manual/optimization/guidelines/).
 
-## Warmed WebGPU repeat
+## Warmed WebGPU repeat with GPU timestamps enabled
 
 [Raw report](profiles/2026-09-09-adrift-desktop-webgpu.json), Adrift, desktop in-app
 Chromium 152, 1280×720 CSS viewport / 2560×1440 canvas. Host: Apple M2 Pro; browser
 adapter identity unavailable. Initial and final baselines differ by **1.9%**.
+**These figures include GPU timer overhead and do not represent the normal demo.**
+A subsequent production-page check was much faster. Use them only as exploratory
+results; the phone profiler defaults to GPU timing off.
 This was a development build with source textures, not a remote mobile capture.
 
 | Intervention | Average fps | Median main-thread ms |
