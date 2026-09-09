@@ -22,7 +22,8 @@
     "build:editor": "node scripts/build-editor.js",
     "prepack": "npm run build:editor",
     "build:coast": "node scripts/build-coast.mjs",
-    "deploy": "node scripts/deploy-pages.mjs"
+    "deploy": "node scripts/deploy-pages.mjs",
+    "build:editor:gallery": "node scripts/build-editor-gallery.mjs"
   },
   "peerDependencies": {
     "playcanvas": "^2.22.0"

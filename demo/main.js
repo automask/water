@@ -16,50 +16,52 @@ import { Director, SHOTS } from './director.js';
 import { FlyCamera } from './FlyCamera.js';
 import { buildGui } from './gui.js';
 
-const canvas = document.getElementById('app');
-const params = new URLSearchParams(location.search);
-const el = id => document.getElementById(id);
-
-async function main() {
+export async function mountGallery({ app: suppliedApp, cameraEntity, sunEntity, baseUrl = import.meta.env.BASE_URL, query = location.search } = {}) {
+    const canvas = suppliedApp?.graphicsDevice.canvas ?? document.getElementById('app');
+    const params = new URLSearchParams(query);
+    const el = id => document.getElementById(id);
     // ---------------------------------------------------------------- device / app
     const requested = params.get('gfx');
     const deviceTypes = requested === 'webgl2' ? [DEVICETYPE_WEBGL2]
         : requested === 'webgpu' ? [DEVICETYPE_WEBGPU]
             : [DEVICETYPE_WEBGPU, DEVICETYPE_WEBGL2];
-    const device = await createGraphicsDevice(canvas, { deviceTypes, antialias: false, alpha: false });
+    const device = suppliedApp?.graphicsDevice ?? await createGraphicsDevice(canvas, { deviceTypes, antialias: false, alpha: false });
     device.maxPixelRatio = import.meta.env.DEV && params.has('reel') ? 1 : Math.min(window.devicePixelRatio, 2);
 
-    const app = new AppBase(canvas);
+    const app = suppliedApp ?? new AppBase(canvas);
     const opts = new AppOptions();
     opts.graphicsDevice = device;
     opts.componentSystems = [RenderComponentSystem, CameraComponentSystem, LightComponentSystem, ScriptComponentSystem];
     opts.resourceHandlers = [TextureHandler, ContainerHandler];   // the scanned rocks and terrain textures
     // Draco meshes and KTX2 / Basis textures in glTF need their decoders (the engine's own builds)
-    dracoInitialize({ jsUrl: `${import.meta.env.BASE_URL}demo/lib/draco/draco.wasm.js`, wasmUrl: `${import.meta.env.BASE_URL}demo/lib/draco/draco.wasm.wasm`, numWorkers: 2 });
-    basisInitialize({ glueUrl: `${import.meta.env.BASE_URL}demo/lib/basis/basis.wasm.js`, wasmUrl: `${import.meta.env.BASE_URL}demo/lib/basis/basis.wasm.wasm`, fallbackUrl: `${import.meta.env.BASE_URL}demo/lib/basis/basis.js` });
-    app.init(opts);
+    dracoInitialize({ jsUrl: `${baseUrl}demo/lib/draco/draco.wasm.js`, wasmUrl: `${baseUrl}demo/lib/draco/draco.wasm.wasm`, numWorkers: 2 });
+    basisInitialize({ glueUrl: `${baseUrl}demo/lib/basis/basis.wasm.js`, wasmUrl: `${baseUrl}demo/lib/basis/basis.wasm.wasm`, fallbackUrl: `${baseUrl}demo/lib/basis/basis.js` });
+    if (!suppliedApp) app.init(opts);
     app.setCanvasFillMode('FILL_WINDOW');
     app.setCanvasResolution('AUTO');
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // ---------------------------------------------------------------- camera
-    const camera = new Entity('Camera');
+    const camera = cameraEntity ?? new Entity('Camera');
+    if (camera.camera) camera.removeComponent('camera');
     camera.addComponent('camera', {
         clearColor: new Color(0.02, 0.04, 0.08),
         nearClip: 0.25,
         farClip: 60000,
         fov: 42
     });
+    // Editor applications are already rendering while the coast loads asynchronously.
+    camera.camera.enabled = false;
     camera.setPosition(0, 6, 40);
     camera.lookAt(0, 1, 0);
-    app.root.addChild(camera);
+    if (!camera.parent) app.root.addChild(camera);
     const fly = new FlyCamera(app, camera);
 
     // ---------------------------------------------------------------- post-processing
     // The engine's own camera-frame script owns the chain: the scene is rendered once into an HDR
     // buffer — the water writes linear radiance into it — and tone mapping, bloom, depth of field,
     // the grade and the god rays are all composed afterwards.
-    camera.addComponent('script');
+    if (!camera.script) camera.addComponent('script');
     /** @type {import('playcanvas/scripts/esm/camera-frame.mjs').CameraFrame} */
     const frame = camera.script.create(CinematicFrame);
 
@@ -108,12 +110,13 @@ async function main() {
 
     // ---------------------------------------------------------------- sky + sun
     const sky = new Sky(app);
-    const sun = new Entity('Sun');
+    const sun = sunEntity ?? new Entity('Sun');
+    if (sun.light) sun.removeComponent('light');
     sun.addComponent('light', {
         type: 'directional', castShadows: true, shadowResolution: 2048, shadowDistance: 180,
         shadowBias: 0.2, normalOffsetBias: 0.05, shadowType: SHADOW_PCF3_32F, numCascades: 3
     });
-    app.root.addChild(sun);
+    if (!sun.parent) app.root.addChild(sun);
 
     // shafts of sun through the sea haze; off by default because it costs a pass and reads as
     // milky over open water, but it is the finishing touch on the low-sun shots
@@ -170,7 +173,7 @@ async function main() {
     syncSun();
 
     // ---------------------------------------------------------------- scene
-    await buildSeabed(app, device);
+    await buildSeabed(app, device, 0, `${baseUrl}demo/assets`);
 
     // Development-only source inspection. This large candidate is excluded from production assets.
     // Its bathymetry is not wired to the water; the default gallery uses the validated heightfield.
@@ -413,7 +416,10 @@ async function main() {
     });
 
     window.__water = { app, water, sky, camera, device, frame, director };
-    app.start();
+    // Bind the FFT textures before the camera can draw the newly created surface.
+    water.update(1 / 60, camera);
+    camera.camera.enabled = true;
+    if (!suppliedApp) app.start();
 
     // give the first frames a moment to compile shaders before revealing the scene
     let ready = 0;
@@ -423,12 +429,5 @@ async function main() {
         setTimeout(() => el('loader').remove(), 1000);
     };
     requestAnimationFrame(reveal);
+    return { app, water, sky, camera, sun, director };
 }
-
-main().catch((e) => {
-    console.error(e);
-    const box = el('err');
-    box.style.display = 'block';
-    box.textContent = e.stack || String(e);
-    el('loader')?.remove();
-});

@@ -24,10 +24,10 @@ function loadAsset(app, asset) {
     });
 }
 
-async function loadGroundSet(app, { id, tile, arm: arm_ = false }) {
+async function loadGroundSet(app, { id, tile, arm: arm_ = false }, assets = ASSETS) {
     const tex = async (map, srgb) => {
         const a = await loadAsset(app, new Asset(`${id}_${map}`, 'texture',
-            { url: `${ASSETS}/textures/${id}/${id}_${map}_2k.jpg` }, { srgb, mipmaps: true, anisotropy: 4 }));
+            { url: `${assets}/textures/${id}/${id}_${map}_2k.jpg` }, { srgb, mipmaps: true, anisotropy: 4 }));
         a.resource.addressU = ADDRESS_REPEAT;
         a.resource.addressV = ADDRESS_REPEAT;
         return a.resource;
@@ -56,11 +56,11 @@ export async function loadCoastModel(app, url, at) {
 }
 
 /** Load the offline-authored coast. Geometry and bathymetry share the same Blender source. */
-export async function buildSeabed(app, device, seaLevel = 0) {
+export async function buildSeabed(app, device, seaLevel = 0, assets = ASSETS) {
     const [sand, grass, rock, coast] = await Promise.all([
-        loadGroundSet(app, GROUND.sand), loadGroundSet(app, GROUND.grass), loadGroundSet(app, GROUND.rock),
-        loadAsset(app, new Asset('Authored coast', 'container', { url: `${ASSETS}/coast/coast.glb` })),
-        loadBathymetry(`${ASSETS}/coast`)
+        loadGroundSet(app, GROUND.sand, assets), loadGroundSet(app, GROUND.grass, assets), loadGroundSet(app, GROUND.rock, assets),
+        loadAsset(app, new Asset('Authored coast', 'container', { url: `${assets}/coast/coast.glb` })),
+        loadBathymetry(`${assets}/coast`)
     ]);
     const mat = new StandardMaterial();
     mat.diffuse = new Color(1, 1, 1);

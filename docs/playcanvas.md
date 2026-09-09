@@ -178,3 +178,29 @@ Attach after the water script has initialized. If the component is disabled and 
 its Water instance is recreated, so reattach receivers to the new instance. The application owns
 which scene materials participate. The existing visibility and caustic settings control their
 appearance; there is no separate demo-only underwater fog control.
+
+## The editable gallery project
+
+Open [Water + Atmosphere in the Editor](https://playcanvas.com/editor/scene/2591939)
+and press **Launch**. The root entity's `waterGallery` script runs the same nine studies
+as GitHub Pages inside the Editor application's existing canvas and engine. Its Camera
+Entity and Sun Entity fields reference the scene's camera and directional light.
+
+The gallery is an application example, not a required renderer component. Its coast,
+mooring piles, floating buoys, bathymetry, material receivers, shot direction and UI are
+created at launch. They are not baked into the Editor hierarchy. The small
+`water-scripts.mjs` asset contains the separate `waterSurface` and `atmosphereSky`
+components for use in your own authored scenes.
+
+The gallery's **Asset Root** points to `https://marklundin.github.io/water/`.
+Geometry, textures and bathymetry are loaded from that public deployment, so the Editor
+project depends on those hosted files. This avoids duplicating the large environment
+in account storage. To use another host, copy the production `demo/assets` and
+`demo/lib` directories there and change Asset Root. Relative asset paths and the
+matching coast bathymetry must remain intact.
+
+Run `npm run build:editor:gallery` to regenerate `dist-editor/water-gallery.mjs`,
+then upload it over the existing asset. Changes to the reusable components use
+`npm run build:editor` and `dist-editor/water-scripts.mjs` instead. The gallery entry
+point is a one-time application bootstrap: restart Launch after changing its fields.
+Use the reusable components when you need enable/disable lifecycle behaviour.

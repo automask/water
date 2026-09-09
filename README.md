@@ -2,7 +2,7 @@
 
 Real-time water and atmospheric scattering for **PlayCanvas**. An FFT ocean, an independent sky renderer, and nine studies of light above and below the surface.
 
-**[Explore the live demo](https://marklundin.github.io/water/)** · **[Try the sky](https://marklundin.github.io/water/demo/sky.html)** · **[PlayCanvas setup](docs/playcanvas.md)** · **[API guide](docs/api.md)**
+**[Explore the live demo](https://marklundin.github.io/water/)** · **[Try the sky](https://marklundin.github.io/water/demo/sky.html)** · **[PlayCanvas Editor](https://playcanvas.com/editor/scene/2591939) · [Integration guide](docs/playcanvas.md)** · **[API guide](docs/api.md)**
 
 ![Stillwater — quiet waves and reflected coastal rocks](docs/images/stillwater.jpg)
 
@@ -25,6 +25,8 @@ Open the URL printed by Vite. Use **Studio** to change wind, swell, clarity, sun
 The water keeps moving while the camera is paused. WebGPU is preferred; WebGL2 is supported as a fallback.
 
 ## Add it to PlayCanvas
+
+The [Editor gallery](https://playcanvas.com/editor/scene/2591939) runs all nine studies on Launch. Its example script builds the environment at runtime and shares the public demo’s hosted assets; the coast is not an editable Editor hierarchy.
 
 The reusable components are **`waterSurface`** and **`atmosphereSky`**. They use your project's camera and light; the example's coast and cinematic treatment are separate.
 
