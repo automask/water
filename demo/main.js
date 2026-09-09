@@ -349,9 +349,10 @@ export async function mountGallery({ app: suppliedApp, cameraEntity, sunEntity, 
 
     // ---------------------------------------------------------------- loop
     let acc = 0, frames = 0;
+    let renderComparison;
     const buoyFocus = new Vec3(-2, 0.8, -2);
     app.on('update', (dt) => {
-        const step = params.has('still') ? 1 / 60 : Math.min(dt, 0.05);
+        const step = renderComparison?.frozen ? 0 : params.has('still') ? 1 / 60 : Math.min(dt, 0.05);
         if (!transition.active) director.update(step);
         if (manual) fly.update(dt);
 
@@ -415,6 +416,10 @@ export async function mountGallery({ app: suppliedApp, cameraEntity, sunEntity, 
         if (acc > 0.5) { fpsEl.textContent = Math.round(frames / acc); acc = 0; frames = 0; }
     });
 
+    if (import.meta.env.DEV && params.has('compare')) {
+        const { installRenderComparison } = await import('./renderComparison.js');
+        renderComparison = installRenderComparison({ app, device, frame, director, water, params });
+    }
     if (params.has('profile')) {
         const { installProfile } = await import('./profile.js');
         installProfile({ app, device, water, frame, director, sun, params });

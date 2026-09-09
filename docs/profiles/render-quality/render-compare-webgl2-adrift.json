@@ -1,0 +1,110 @@
+{
+  "status": "complete",
+  "backend": "webgl2",
+  "shot": "adrift",
+  "waterTime": 3.016666666666661,
+  "note": "Fixed camera, waves and props. FFT still executes at dt=0. GPU timestamps off. Frame intervals include presentation scheduling; CPU times are update/submission, not GPU execution.",
+  "baselineDriftPercent": 0.71,
+  "results": [
+    {
+      "id": "baseline",
+      "requestedSamples": 4,
+      "engineSamples": 4,
+      "hardwareSamples": 4,
+      "requestedFormat": "rgba16",
+      "actualFormat": "RGBA16F",
+      "canvas": [
+        2560,
+        1440
+      ],
+      "estimatedMiB": 551.88,
+      "frames": 239,
+      "fps": 39.33,
+      "meanFrameMs": 25.424,
+      "medianFrameMs": 24.2,
+      "p95FrameMs": 58.1,
+      "medianCpuMs": 1.8,
+      "image": "quality-webgl2-adrift-baseline.png"
+    },
+    {
+      "id": "msaa2",
+      "requestedSamples": 2,
+      "engineSamples": 2,
+      "hardwareSamples": 2,
+      "requestedFormat": "rgba16",
+      "actualFormat": "RGBA16F",
+      "canvas": [
+        2560,
+        1440
+      ],
+      "estimatedMiB": 551.88,
+      "frames": 269,
+      "fps": 44.58,
+      "meanFrameMs": 22.433,
+      "medianFrameMs": 17.6,
+      "p95FrameMs": 49.9,
+      "medianCpuMs": 1.6,
+      "image": "quality-webgl2-adrift-msaa2.png"
+    },
+    {
+      "id": "packed",
+      "requestedSamples": 4,
+      "engineSamples": 4,
+      "hardwareSamples": 4,
+      "requestedFormat": "rg11b10",
+      "actualFormat": "RG11B10F",
+      "canvas": [
+        2560,
+        1440
+      ],
+      "estimatedMiB": 496.8,
+      "frames": 267,
+      "fps": 44.05,
+      "meanFrameMs": 22.701,
+      "medianFrameMs": 24.5,
+      "p95FrameMs": 50,
+      "medianCpuMs": 1.4,
+      "image": "quality-webgl2-adrift-packed.png"
+    },
+    {
+      "id": "both",
+      "requestedSamples": 2,
+      "engineSamples": 2,
+      "hardwareSamples": 2,
+      "requestedFormat": "rg11b10",
+      "actualFormat": "RG11B10F",
+      "canvas": [
+        2560,
+        1440
+      ],
+      "estimatedMiB": 496.8,
+      "frames": 288,
+      "fps": 47.78,
+      "meanFrameMs": 20.928,
+      "medianFrameMs": 16.7,
+      "p95FrameMs": 49.2,
+      "medianCpuMs": 1.6,
+      "image": "quality-webgl2-adrift-both.png"
+    },
+    {
+      "id": "repeat",
+      "requestedSamples": 4,
+      "engineSamples": 4,
+      "hardwareSamples": 4,
+      "requestedFormat": "rgba16",
+      "actualFormat": "RGBA16F",
+      "canvas": [
+        2560,
+        1440
+      ],
+      "estimatedMiB": 551.88,
+      "frames": 240,
+      "fps": 39.61,
+      "meanFrameMs": 25.244,
+      "medianFrameMs": 24.2,
+      "p95FrameMs": 58.2,
+      "medianCpuMs": 1.6,
+      "image": "quality-webgl2-adrift-repeat.png"
+    }
+  ]
+}

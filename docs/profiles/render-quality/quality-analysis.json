@@ -1,0 +1,443 @@
+[
+  {
+    "backend": "webgl2",
+    "shot": "adrift",
+    "note": "8-bit output pixel differences, not a perceptual quality score. Baseline repeat measures capture noise.",
+    "variants": [
+      {
+        "id": "msaa2",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0.0574,
+            "maxChannelError": 205,
+            "channelsOver2Percent": 0.3039,
+            "meanSignedRGB": [
+              -0.0015,
+              -0.0011,
+              -0.0007
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0.0006,
+            "maxChannelError": 87,
+            "channelsOver2Percent": 0.0024,
+            "meanSignedRGB": [
+              0.0009,
+              0.0003,
+              0.0001
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0.2752,
+            "maxChannelError": 205,
+            "channelsOver2Percent": 1.5459,
+            "meanSignedRGB": [
+              -0.0214,
+              -0.0127,
+              -0.0094
+            ]
+          }
+        }
+      },
+      {
+        "id": "packed",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 1.053,
+            "maxChannelError": 12,
+            "channelsOver2Percent": 2.7083,
+            "meanSignedRGB": [
+              -0.7099,
+              -0.8505,
+              -1.595
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 1.2458,
+            "maxChannelError": 4,
+            "channelsOver2Percent": 1.4891,
+            "meanSignedRGB": [
+              -1.0301,
+              -1.1055,
+              -1.6019
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 1.1368,
+            "maxChannelError": 12,
+            "channelsOver2Percent": 4.3094,
+            "meanSignedRGB": [
+              -0.9825,
+              -0.8633,
+              -1.5616
+            ]
+          }
+        }
+      },
+      {
+        "id": "both",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 1.0672,
+            "maxChannelError": 206,
+            "channelsOver2Percent": 2.9982,
+            "meanSignedRGB": [
+              -0.702,
+              -0.8428,
+              -1.5852
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 1.2456,
+            "maxChannelError": 85,
+            "channelsOver2Percent": 1.4895,
+            "meanSignedRGB": [
+              -1.0289,
+              -1.105,
+              -1.6018
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 1.2921,
+            "maxChannelError": 206,
+            "channelsOver2Percent": 5.7106,
+            "meanSignedRGB": [
+              -0.9783,
+              -0.8495,
+              -1.5436
+            ]
+          }
+        }
+      },
+      {
+        "id": "repeat",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "backend": "webgpu",
+    "shot": "adrift",
+    "note": "8-bit output pixel differences, not a perceptual quality score. Baseline repeat measures capture noise.",
+    "variants": [
+      {
+        "id": "msaa2",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "id": "packed",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 1.0321,
+            "maxChannelError": 13,
+            "channelsOver2Percent": 2.3154,
+            "meanSignedRGB": [
+              -0.6847,
+              -0.8321,
+              -1.5747
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 1.2399,
+            "maxChannelError": 4,
+            "channelsOver2Percent": 1.4632,
+            "meanSignedRGB": [
+              -1.0243,
+              -1.1003,
+              -1.5951
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 1.079,
+            "maxChannelError": 13,
+            "channelsOver2Percent": 3.3705,
+            "meanSignedRGB": [
+              -0.9205,
+              -0.808,
+              -1.5034
+            ]
+          }
+        }
+      },
+      {
+        "id": "both",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 1.0321,
+            "maxChannelError": 13,
+            "channelsOver2Percent": 2.3154,
+            "meanSignedRGB": [
+              -0.6847,
+              -0.8321,
+              -1.5747
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 1.2399,
+            "maxChannelError": 4,
+            "channelsOver2Percent": 1.4632,
+            "meanSignedRGB": [
+              -1.0243,
+              -1.1003,
+              -1.5951
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 1.079,
+            "maxChannelError": 13,
+            "channelsOver2Percent": 3.3705,
+            "meanSignedRGB": [
+              -0.9205,
+              -0.808,
+              -1.5034
+            ]
+          }
+        }
+      },
+      {
+        "id": "repeat",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "backend": "webgpu",
+    "shot": "blue-hour",
+    "note": "8-bit output pixel differences, not a perceptual quality score. Baseline repeat measures capture noise.",
+    "variants": [
+      {
+        "id": "msaa2",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "id": "packed",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0.4643,
+            "maxChannelError": 3,
+            "channelsOver2Percent": 0.0016,
+            "meanSignedRGB": [
+              -0.445,
+              -0.3174,
+              -0.6251
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0.5753,
+            "maxChannelError": 3,
+            "channelsOver2Percent": 0.0005,
+            "meanSignedRGB": [
+              -0.4797,
+              -0.3073,
+              -0.9371
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0.596,
+            "maxChannelError": 3,
+            "channelsOver2Percent": 0.0041,
+            "meanSignedRGB": [
+              -0.6236,
+              -0.5156,
+              -0.6381
+            ]
+          }
+        }
+      },
+      {
+        "id": "both",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0.4643,
+            "maxChannelError": 3,
+            "channelsOver2Percent": 0.0016,
+            "meanSignedRGB": [
+              -0.445,
+              -0.3174,
+              -0.6251
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0.5753,
+            "maxChannelError": 3,
+            "channelsOver2Percent": 0.0005,
+            "meanSignedRGB": [
+              -0.4797,
+              -0.3073,
+              -0.9371
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0.596,
+            "maxChannelError": 3,
+            "channelsOver2Percent": 0.0041,
+            "meanSignedRGB": [
+              -0.6236,
+              -0.5156,
+              -0.6381
+            ]
+          }
+        }
+      },
+      {
+        "id": "repeat",
+        "metrics": {
+          "frame": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "sky": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          },
+          "centre": {
+            "meanAbsoluteChannelError": 0,
+            "maxChannelError": 0,
+            "channelsOver2Percent": 0,
+            "meanSignedRGB": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  }
+]
