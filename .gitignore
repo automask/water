@@ -5,11 +5,10 @@ dist/
 *.log
 *.blend1
 **/__pycache__/
-.env
-.env.*
 !.env.example
 art/coast-seed.f32
 art/coast-seed.json
 demo/assets/models/saltreach_src.glb
 renders/
 videos/
+config.bat
